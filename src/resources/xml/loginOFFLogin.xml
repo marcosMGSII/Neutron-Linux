@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<root>
+    <logins>       
+        <login>
+            <nomeUsuario>FyGmp26D0LQGI0nyDAEwrA==</nomeUsuario>
+            <senhaUsuario>a21TUp01uJs=</senhaUsuario>
+            <organizacaoUsuario>gDd2rTj60u/3bw4EpQeH/g==</organizacaoUsuario>
+        </login>
+    </logins>
+    <listaprocessos>
+        <nomeprocesso>
+            <nomeUsuario>FyGmp26D0LQGI0nyDAEwrA==</nomeUsuario>
+            <nome>P</nome>
+            <id>0</id>
+        </nomeprocesso>
+    </listaprocessos>
+</root>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->

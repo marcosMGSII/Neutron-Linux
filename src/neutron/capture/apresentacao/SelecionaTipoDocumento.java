@@ -121,7 +121,7 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddBotoes(RetornoProcesso rp) {
-        if (rp != null) {
+        if (rp != null && rp.getTiposDocumentos() != null) {
             for (RetornoProcesso_TipoDocumento umTipo : rp.getTiposDocumentos()) {
                 addBotaoProcesso(umTipo);
             }

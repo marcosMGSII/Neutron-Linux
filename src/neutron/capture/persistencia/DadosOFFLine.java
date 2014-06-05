@@ -8,7 +8,6 @@ package neutron.capture.persistencia;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import criptografia.Criptografia;
-import java.awt.List;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,6 +24,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import neutron.capture.negocio.RetornoCampo;
 import neutron.capture.negocio.RetornoNomeProcesso;
 import neutron.capture.negocio.RetornoProcesso;
+import neutron.capture.negocio.RetornoProcesso_TipoDocumento;
 import neutron.capture.negocio.RetornoTipoDado;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
@@ -251,21 +251,33 @@ public class DadosOFFLine {
                         Element processoTag = (Element) processosTag.getElementsByTagName("processo").item(i);
                         if (processoTag != null && "processo".equals(processoTag.getNodeName())) {
                             Element nomeprocessoTag = (Element) processoTag.getElementsByTagName("nomeprocesso").item(0);
-                            retorno.setNome(criptografia.DecryptText(nomeprocessoTag.getTextContent()));
+                            if (nomeprocessoTag != null) {
+                                retorno.setNome(criptografia.DecryptText(nomeprocessoTag.getTextContent()));
+                            }
                             Element idprocessoTag = (Element) processoTag.getElementsByTagName("idprocesso").item(0);
-                            retorno.setID(Integer.parseInt(criptografia.DecryptText(idprocessoTag.getTextContent())));
+                            if (idprocessoTag != null) {
+                                retorno.setID(Integer.parseInt(criptografia.DecryptText(idprocessoTag.getTextContent())));
+                            }
                             Element idtipodocumentalTag = (Element) processoTag.getElementsByTagName("idtipodocumental").item(0);
-                            retorno.setIDTipoDocumental(Integer.parseInt(criptografia.DecryptText(idtipodocumentalTag.getTextContent())));
+                            if (idtipodocumentalTag != null) {
+                                retorno.setIDTipoDocumental(Integer.parseInt(criptografia.DecryptText(idtipodocumentalTag.getTextContent())));
+                            }
                             Element nometipodocumentalTag = (Element) processoTag.getElementsByTagName("nometipodocumental").item(0);
-                            retorno.setNomeTipoDocumental(criptografia.DecryptText(nometipodocumentalTag.getTextContent()));
+                            if (nometipodocumentalTag != null) {
+                                retorno.setNomeTipoDocumental(criptografia.DecryptText(nometipodocumentalTag.getTextContent()));
+                            }
                             Element idjanelaTag = (Element) processoTag.getElementsByTagName("idjanela").item(0);
-                            retorno.setIDJanela(Integer.parseInt(criptografia.DecryptText(idjanelaTag.getTextContent())));
+                            if (idjanelaTag != null) {
+                                retorno.setIDJanela(Integer.parseInt(criptografia.DecryptText(idjanelaTag.getTextContent())));
+                            }
                             Element idorganizacaoTag = (Element) processoTag.getElementsByTagName("idorganizacao").item(0);
-                            retorno.setIDOrganizacao(Integer.parseInt(criptografia.DecryptText(idorganizacaoTag.getTextContent())));
+                            if (idorganizacaoTag != null) {
+                                retorno.setIDOrganizacao(Integer.parseInt(criptografia.DecryptText(idorganizacaoTag.getTextContent())));
+                            }
                             Element camposTag = (Element) processoTag.getElementsByTagName("campos").item(0);
                             if (camposTag != null) {
                                 ArrayList<RetornoCampo> campos = new ArrayList<>();
-                                for (int j = 0; j < camposTag.getChildNodes().getLength() ; j++) {
+                                for (int j = 0; j < camposTag.getChildNodes().getLength(); j++) {
                                     Element campoTag = (Element) camposTag.getElementsByTagName("campo").item(j);
                                     if (campoTag != null) {
                                         RetornoCampo campo = new RetornoCampo();
@@ -303,13 +315,46 @@ public class DadosOFFLine {
                                         campos.add(campo);
                                     }
                                 }
-                                RetornoCampo[] camposADD = new RetornoCampo[campos.size()]; 
+                                RetornoCampo[] camposADD = new RetornoCampo[campos.size()];
                                 int ir = 0;
                                 for (RetornoCampo retornoCampo : campos) {
                                     camposADD[ir] = retornoCampo;
-                                    ir ++;
+                                    ir++;
                                 }
                                 retorno.setCampos(camposADD);
+                                Element tiposDocumentosTAG = (Element) processoTag.getElementsByTagName("tiposdocumentos").item(0);
+                                if (tiposDocumentosTAG != null) {
+                                    ArrayList<RetornoProcesso_TipoDocumento> tiposDocumentos = new ArrayList<>();
+                                    for (int j = 0; j < tiposDocumentosTAG.getChildNodes().getLength(); j++) {
+                                        Element tipoDocumentoTAG = (Element) tiposDocumentosTAG.getElementsByTagName("tipodocumento").item(j);
+                                        if (tipoDocumentoTAG != null) {
+                                            RetornoProcesso_TipoDocumento tipoDoc = new RetornoProcesso_TipoDocumento();
+                                            Element idtipo_docTag = (Element) tipoDocumentoTAG.getElementsByTagName("id").item(0);
+                                            tipoDoc.setID(Integer.parseInt(criptografia.DecryptText(idtipo_docTag.getTextContent())));
+
+                                            Element nomeDocTag = (Element) tipoDocumentoTAG.getElementsByTagName("nome").item(0);
+                                            tipoDoc.setNome(criptografia.DecryptText(nomeDocTag.getTextContent()));
+
+                                            Element padraocorDocTag = (Element) tipoDocumentoTAG.getElementsByTagName("padraocor").item(0);
+                                            tipoDoc.setPadraoCor(criptografia.DecryptText(padraocorDocTag.getTextContent()));
+
+                                            Element obrigatorioDocTag = (Element) tipoDocumentoTAG.getElementsByTagName("obrigatorio").item(0);
+                                            tipoDoc.setObrigatorio(Boolean.getBoolean(criptografia.DecryptText(obrigatorioDocTag.getTextContent())));
+
+                                            Element numeropaginasTag = (Element) tipoDocumentoTAG.getElementsByTagName("numeropaginas").item(0);
+                                            tipoDoc.setNumeroPaginas(Integer.parseInt(criptografia.DecryptText(numeropaginasTag.getTextContent())));
+
+                                            tiposDocumentos.add(tipoDoc);
+                                        }
+                                    }
+                                    RetornoProcesso_TipoDocumento[] tdADD = new RetornoProcesso_TipoDocumento[tiposDocumentos.size()];
+                                    ir = 0;
+                                    for (RetornoProcesso_TipoDocumento retornoTD : tiposDocumentos) {
+                                        tdADD[ir] = retornoTD;
+                                        ir++;
+                                    }
+                                    retorno.setTiposDocumentos(tdADD);
+                                }
                             }
                         }
                     }
@@ -325,129 +370,169 @@ public class DadosOFFLine {
         Criptografia criptografia = new Criptografia();
         Element nomeprocessoTag;
         if (!novo) {
-            nomeprocessoTag = (Element) processoTag.getElementsByTagName("nomeprocesso").item(0);
+            nomeprocessoTag = (Element) processoTag.getElementsByTagName("nome").item(0);
         } else {
-            nomeprocessoTag = (Element) doc.createElement("nomeprocesso");
+            nomeprocessoTag = (Element) doc.createElement("nome");
             processoTag.appendChild(nomeprocessoTag);
         }
-        nomeprocessoTag.setTextContent(criptografia.EncryptText(p.getNome()));
-
-        Element idprocessoTag;
-        if (!novo) {
-            idprocessoTag = (Element) processoTag.getElementsByTagName("idprocesso").item(0);
-        } else {
-            idprocessoTag = (Element) doc.createElement("idprocesso");
-            processoTag.appendChild(idprocessoTag);
-        }
-        idprocessoTag.setTextContent(criptografia.EncryptText(String.valueOf(p.getID())));
-
-        Element idtipodocumentalTag;
-        if (!novo) {
-            idtipodocumentalTag = (Element) processoTag.getElementsByTagName("idtipodocumental").item(0);
-        } else {
-            idtipodocumentalTag = (Element) doc.createElement("idtipodocumental");
-            processoTag.appendChild(idtipodocumentalTag);
-        }
-        idtipodocumentalTag.setTextContent(criptografia.EncryptText(String.valueOf(p.getIDTipoDocumental())));
-
-        Element nometipodocumentalTag;
-        if (!novo) {
-            nometipodocumentalTag = (Element) processoTag.getElementsByTagName("nometipodocumental").item(0);
-        } else {
-            nometipodocumentalTag = (Element) doc.createElement("nometipodocumental");
-            processoTag.appendChild(nometipodocumentalTag);
-        }
-        nometipodocumentalTag.setTextContent(criptografia.EncryptText(p.getNomeTipoDocumental()));
-
-        Element idjanelaTag;
-        if (!novo) {
-            idjanelaTag = (Element) processoTag.getElementsByTagName("idjanela").item(0);
-        } else {
-            idjanelaTag = (Element) doc.createElement("idjanela");
-            processoTag.appendChild(idjanelaTag);
-        }
-        idjanelaTag.setTextContent(criptografia.EncryptText(String.valueOf(p.getIDJanela())));
-
-        Element idorganizacaoTag;
-        if (!novo) {
-            idorganizacaoTag = (Element) processoTag.getElementsByTagName("idorganizacao").item(0);
-        } else {
-            idorganizacaoTag = (Element) doc.createElement("idorganizacao");
-            processoTag.appendChild(idorganizacaoTag);
-        }
-        idorganizacaoTag.setTextContent(criptografia.EncryptText(String.valueOf(p.getIDOrganizacao())));
-
-        Element camposTag;
-        if (!novo) {
-            camposTag = (Element) processoTag.getElementsByTagName("campos").item(0);
-        } else {
-            camposTag = (Element) doc.createElement("campos");
-        }
-        if (camposTag != null) {
-            removeRecursively(camposTag, Node.ELEMENT_NODE, "campo");
-            for (RetornoCampo campo : p.getCampos()) {
-                Element campoTag = (Element) doc.createElement("campo");
-
-                Element casas_decimaisTag = (Element) doc.createElement("casas_decimais");
-                casas_decimaisTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getCasas_Decimais())));
-                campoTag.appendChild(casas_decimaisTag);
-
-                Element unicoTag = (Element) doc.createElement("unico");
-                unicoTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.isUnico())));
-                campoTag.appendChild(unicoTag);
-
-                Element obrigatorioTag = (Element) doc.createElement("obrigatorio");
-                obrigatorioTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.isObrigatorio())));
-                campoTag.appendChild(obrigatorioTag);
-
-                Element idTag = (Element) doc.createElement("id");
-                idTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getID())));
-                campoTag.appendChild(idTag);
-
-                Element nomeTag = (Element) doc.createElement("nome");
-                nomeTag.setTextContent(criptografia.EncryptText(campo.getNOME()));
-                campoTag.appendChild(nomeTag);
-
-                Element apelidoTag = (Element) doc.createElement("apelido");
-                apelidoTag.setTextContent(criptografia.EncryptText(campo.getAPELIDO()));
-                campoTag.appendChild(apelidoTag);
-
-                Element tamanhoTag = (Element) doc.createElement("tamanho");
-                tamanhoTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getTAMANHO())));
-                campoTag.appendChild(tamanhoTag);
-
-                Element numero_internoTag = (Element) doc.createElement("numero_interno");
-                numero_internoTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getNUMERO_INTERNO())));
-                campoTag.appendChild(numero_internoTag);
-
-                Element tipo_dadoTag = (Element) doc.createElement("tipo_dado");
-
-                Element idtipo_dadoTag = (Element) doc.createElement("id");
-                idtipo_dadoTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getTIPO_DADO().getID())));
-                tipo_dadoTag.appendChild(idtipo_dadoTag);
-
-                Element tipoTag = (Element) doc.createElement("tipo");
-                tipoTag.setTextContent(criptografia.EncryptText(campo.getTIPO_DADO().getTIPO()));
-                tipo_dadoTag.appendChild(tipoTag);
-
-                Element deTag = (Element) doc.createElement("de");
-                deTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getTIPO_DADO().getDE())));
-                tipo_dadoTag.appendChild(deTag);
-
-                Element ateTag = (Element) doc.createElement("ate");
-                ateTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getTIPO_DADO().getATE())));
-                tipo_dadoTag.appendChild(ateTag);
-
-                Element tipo_dado_bancoTag = (Element) doc.createElement("tipo_dado_banco");
-                tipo_dado_bancoTag.setTextContent(criptografia.EncryptText(campo.getTIPO_DADO().getTIPO_DADOS_NO_BANCO()));
-                tipo_dadoTag.appendChild(tipo_dado_bancoTag);
-
-                campoTag.appendChild(tipo_dadoTag);
-
-                camposTag.appendChild(campoTag);
+        if (nomeprocessoTag != null) {
+            nomeprocessoTag.setTextContent(criptografia.EncryptText(p.getNome()));
+            if (novo) {
+                processoTag.appendChild(nomeprocessoTag);
             }
-            processoTag.appendChild(camposTag);
+
+            Element idprocessoTag;
+            if (!novo) {
+                idprocessoTag = (Element) processoTag.getElementsByTagName("idprocesso").item(0);
+            } else {
+                idprocessoTag = (Element) doc.createElement("idprocesso");
+                processoTag.appendChild(idprocessoTag);
+            }
+            idprocessoTag.setTextContent(criptografia.EncryptText(String.valueOf(p.getID())));
+
+            Element idtipodocumentalTag;
+            if (!novo) {
+                idtipodocumentalTag = (Element) processoTag.getElementsByTagName("idtipodocumental").item(0);
+            } else {
+                idtipodocumentalTag = (Element) doc.createElement("idtipodocumental");
+                processoTag.appendChild(idtipodocumentalTag);
+            }
+            idtipodocumentalTag.setTextContent(criptografia.EncryptText(String.valueOf(p.getIDTipoDocumental())));
+
+            Element nometipodocumentalTag;
+            if (!novo) {
+                nometipodocumentalTag = (Element) processoTag.getElementsByTagName("nometipodocumental").item(0);
+            } else {
+                nometipodocumentalTag = (Element) doc.createElement("nometipodocumental");
+                processoTag.appendChild(nometipodocumentalTag);
+            }
+            nometipodocumentalTag.setTextContent(criptografia.EncryptText(p.getNomeTipoDocumental()));
+
+            Element idjanelaTag;
+            if (!novo) {
+                idjanelaTag = (Element) processoTag.getElementsByTagName("idjanela").item(0);
+            } else {
+                idjanelaTag = (Element) doc.createElement("idjanela");
+                processoTag.appendChild(idjanelaTag);
+            }
+            idjanelaTag.setTextContent(criptografia.EncryptText(String.valueOf(p.getIDJanela())));
+
+            Element idorganizacaoTag;
+            if (!novo) {
+                idorganizacaoTag = (Element) processoTag.getElementsByTagName("idorganizacao").item(0);
+            } else {
+                idorganizacaoTag = (Element) doc.createElement("idorganizacao");
+                processoTag.appendChild(idorganizacaoTag);
+            }
+            idorganizacaoTag.setTextContent(criptografia.EncryptText(String.valueOf(p.getIDOrganizacao())));
+
+            Element camposTag;
+            if (!novo) {
+                camposTag = (Element) processoTag.getElementsByTagName("campos").item(0);
+            } else {
+                camposTag = (Element) doc.createElement("campos");
+            }
+            if (camposTag != null) {
+                removeRecursively(camposTag, Node.ELEMENT_NODE, "campo");
+                for (RetornoCampo campo : p.getCampos()) {
+                    Element campoTag = (Element) doc.createElement("campo");
+
+                    Element casas_decimaisTag = (Element) doc.createElement("casas_decimais");
+                    casas_decimaisTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getCasas_Decimais())));
+                    campoTag.appendChild(casas_decimaisTag);
+
+                    Element unicoTag = (Element) doc.createElement("unico");
+                    unicoTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.isUnico())));
+                    campoTag.appendChild(unicoTag);
+
+                    Element obrigatorioTag = (Element) doc.createElement("obrigatorio");
+                    obrigatorioTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.isObrigatorio())));
+                    campoTag.appendChild(obrigatorioTag);
+
+                    Element idTag = (Element) doc.createElement("id");
+                    idTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getID())));
+                    campoTag.appendChild(idTag);
+
+                    Element nomeTag = (Element) doc.createElement("nome");
+                    nomeTag.setTextContent(criptografia.EncryptText(campo.getNOME()));
+                    campoTag.appendChild(nomeTag);
+
+                    Element apelidoTag = (Element) doc.createElement("apelido");
+                    apelidoTag.setTextContent(criptografia.EncryptText(campo.getAPELIDO()));
+                    campoTag.appendChild(apelidoTag);
+
+                    Element tamanhoTag = (Element) doc.createElement("tamanho");
+                    tamanhoTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getTAMANHO())));
+                    campoTag.appendChild(tamanhoTag);
+
+                    Element numero_internoTag = (Element) doc.createElement("numero_interno");
+                    numero_internoTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getNUMERO_INTERNO())));
+                    campoTag.appendChild(numero_internoTag);
+
+                    Element tipo_dadoTag = (Element) doc.createElement("tipo_dado");
+
+                    Element idtipo_dadoTag = (Element) doc.createElement("id");
+                    idtipo_dadoTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getTIPO_DADO().getID())));
+                    tipo_dadoTag.appendChild(idtipo_dadoTag);
+
+                    Element tipoTag = (Element) doc.createElement("tipo");
+                    tipoTag.setTextContent(criptografia.EncryptText(campo.getTIPO_DADO().getTIPO()));
+                    tipo_dadoTag.appendChild(tipoTag);
+
+                    Element deTag = (Element) doc.createElement("de");
+                    deTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getTIPO_DADO().getDE())));
+                    tipo_dadoTag.appendChild(deTag);
+
+                    Element ateTag = (Element) doc.createElement("ate");
+                    ateTag.setTextContent(criptografia.EncryptText(String.valueOf(campo.getTIPO_DADO().getATE())));
+                    tipo_dadoTag.appendChild(ateTag);
+
+                    Element tipo_dado_bancoTag = (Element) doc.createElement("tipo_dado_banco");
+                    tipo_dado_bancoTag.setTextContent(criptografia.EncryptText(campo.getTIPO_DADO().getTIPO_DADOS_NO_BANCO()));
+                    tipo_dadoTag.appendChild(tipo_dado_bancoTag);
+
+                    campoTag.appendChild(tipo_dadoTag);
+
+                    camposTag.appendChild(campoTag);
+                }
+                processoTag.appendChild(camposTag);
+                Element tiposDocumentosTag;
+                if (!novo) {
+                    tiposDocumentosTag = (Element) processoTag.getElementsByTagName("tiposdocumentos").item(0);
+                } else {
+                    tiposDocumentosTag = (Element) processoTag.getElementsByTagName("tiposdocumentos").item(0);
+                }
+                if (tiposDocumentosTag != null) {
+                    removeRecursively(tiposDocumentosTag, Node.ELEMENT_NODE, "tipodocumento");
+                    for (RetornoProcesso_TipoDocumento umTD : p.getTiposDocumentos()) {
+                        Element tipodocTab = (Element) doc.createElement("tipodocumento");
+
+                        Element idTipoDocTag = (Element) doc.createElement("id");
+                        idTipoDocTag.setTextContent(criptografia.EncryptText(String.valueOf(umTD.getID())));
+                        tipodocTab.appendChild(idTipoDocTag);
+
+                        Element nomeTipoDocTag = (Element) doc.createElement("nome");
+                        nomeTipoDocTag.setTextContent(criptografia.EncryptText(umTD.getNome()));
+                        tipodocTab.appendChild(nomeTipoDocTag);
+
+                        Element padraocorTipoDocTag = (Element) doc.createElement("padraocor");
+                        padraocorTipoDocTag.setTextContent(criptografia.EncryptText(umTD.getPadraoCor()));
+                        tipodocTab.appendChild(padraocorTipoDocTag);
+
+                        Element obrigatorioTipoDocTag = (Element) doc.createElement("obrigatorio");
+                        obrigatorioTipoDocTag.setTextContent(criptografia.EncryptText(String.valueOf(umTD.isObrigatorio())));
+                        tipodocTab.appendChild(obrigatorioTipoDocTag);
+
+                        Element npaginasTipoDocTag = (Element) doc.createElement("numeropaginas");
+                        npaginasTipoDocTag.setTextContent(criptografia.EncryptText(String.valueOf(umTD.getNumeroPaginas())));
+                        tipodocTab.appendChild(npaginasTipoDocTag);
+
+                        tiposDocumentosTag.appendChild(tipodocTab);
+                    }
+                }
+            }
         }
+
         return processoTag;
     }
 

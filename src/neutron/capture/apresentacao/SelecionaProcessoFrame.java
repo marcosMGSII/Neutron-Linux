@@ -7,14 +7,22 @@ package neutron.capture.apresentacao;
 
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.xml.parsers.ParserConfigurationException;
 import neutron.capture.negocio.Controle;
 import neutron.capture.negocio.RetornoNomeProcesso;
+import neutron.capture.negocio.RetornoProcesso;
+import neutron.capture.persistencia.DadosOFFLine;
 import neutron.capture.persistencia.acessoWebService;
 
 /**
@@ -162,7 +170,11 @@ public class SelecionaProcessoFrame extends javax.swing.JFrame {
         botaoProcesso.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                processoButtonsActionPerformed(evt);
+                try {
+                    processoButtonsActionPerformed(evt);
+                } catch (IOException ex) {
+                    Logger.getLogger(SelecionaProcessoFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         botaoProcesso.setBorder(null);
@@ -184,17 +196,38 @@ public class SelecionaProcessoFrame extends javax.swing.JFrame {
         }
     }
 
-    private void processoButtonsActionPerformed(java.awt.event.ActionEvent evt) {
+    private void processoButtonsActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
         JButton bt = (JButton) evt.getSource();
         System.out.println("Botão clicado:" + bt.getName());
         String idProcesso = bt.getName().substring(4);
         System.out.println("idProcesso:" + idProcesso);
         Controle cp = Controle.getInstacia();
+        RetornoProcesso p = null;
         if (!cp.isOffline()) {
             acessoWebService servico = new acessoWebService();
-            cp.setProcesso(servico.Processo(idProcesso, cp.getChaveAcesso()));
+            p = servico.Processo(idProcesso, cp.getChaveAcesso());
         } else {
-
+            DadosOFFLine getProcessoOffLine;
+            try {
+                getProcessoOffLine = new DadosOFFLine();
+                p = getProcessoOffLine.recuperaDadosProcessoOFFLine("" + idProcesso);
+            } catch (ParserConfigurationException | NoSuchAlgorithmException ex) {
+                Logger.getLogger(SelecionaProcessoFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (p != null) {
+            cp.setProcesso(p);
+            if (!cp.isOffline()) {
+                DadosOFFLine setProcessoOffLine;
+                try {
+                    setProcessoOffLine = new DadosOFFLine();
+                    setProcessoOffLine.salvaDadosProcessoOFFLine(p);
+                } catch (        ParserConfigurationException | NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+                    Logger.getLogger(SelecionaProcessoFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }                
+            }
+        } else {
+            //Falha ao buscar dados do processo
         }
         SelecionaTipoDocumento st = new SelecionaTipoDocumento();
         st.setVisible(true);

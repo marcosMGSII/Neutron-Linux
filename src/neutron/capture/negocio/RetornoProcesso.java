@@ -8,6 +8,7 @@ package neutron.capture.negocio;
 /**
  *
  * @author Marcos Arruda
+ * @date 05/06/2014
  */
 public class RetornoProcesso extends erro {
 
@@ -61,7 +62,7 @@ public class RetornoProcesso extends erro {
     }
 
     public void setIDOrganizacao(int IDOrganizacao) {
-        this.IDOrganizacao = IDOrganizacao;
+        this.IDOrganizacao = IDOrganizacao;        
     }
 
     public RetornoUsuarioLogado getUsuarioLogado() {

@@ -210,8 +210,7 @@ public class LoginFrame extends javax.swing.JFrame {
             } else {
                 try {
                     DadosOFFLine loginOFF = new DadosOFFLine();
-                    if (loginOFF.validaDadosLoginOFFLine(this.txtUsuario.getText(), this.txtSenha.getText(), this.txtOrganizacao.getText())) {
-                        JOptionPane.showMessageDialog(null, "Modo offline ativado - Usuário OK.");
+                    if (loginOFF.validaDadosLoginOFFLine(this.txtUsuario.getText(), this.txtSenha.getText(), this.txtOrganizacao.getText())) {                        
                         Controle cp = Controle.getInstacia();
                         cp.setOffline(true);
                         cp.setNomesProcessos(loginOFF.recuperaDadosListaProcessoOFFLine(this.txtUsuario.getText()),this.txtUsuario.getText());

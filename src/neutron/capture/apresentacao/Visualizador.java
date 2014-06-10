@@ -80,7 +80,7 @@ public class Visualizador extends javax.swing.JFrame {
         setBackground(java.awt.Color.white);
 
         btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/voltar.png"))); // NOI18N
-        btnVoltar.setToolTipText("Voltar para\nseleção de \ntipo de documento ");
+        btnVoltar.setToolTipText("<html>Voltar para a<br>seleção de<br>tipo de documento</html>");
         btnVoltar.setBorder(null);
         btnVoltar.setBorderPainted(false);
         btnVoltar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/voltar_sel.png"))); // NOI18N

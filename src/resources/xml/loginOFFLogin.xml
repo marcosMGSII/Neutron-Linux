@@ -1,19 +1,58 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <root>
-    <logins>       
+    <logins>
         <login>
             <nomeUsuario>FyGmp26D0LQGI0nyDAEwrA==</nomeUsuario>
             <senhaUsuario>a21TUp01uJs=</senhaUsuario>
             <organizacaoUsuario>gDd2rTj60u/3bw4EpQeH/g==</organizacaoUsuario>
         </login>
+        <login>
+            <nomeUsuario>fcSlESEA2hE=</nomeUsuario>
+            <senhaUsuario>TgJzr9Gcrfqo1X9JvAphLw==</senhaUsuario>
+            <organizacaoUsuario>bKaoa0u7btE=</organizacaoUsuario>
+        </login>
     </logins>
     <listaprocessos>
         <nomeprocesso>
-            <nomeUsuario>FyGmp26D0LQGI0nyDAEwrA==</nomeUsuario>
-            <nome>P</nome>
-            <id>0</id>
+            <nomeUsuario>fcSlESEA2hE=</nomeUsuario>
+            <nome>/IftOkkhQX4=</nome>
+            <id>MMeWeBWh28g=</id>
+        </nomeprocesso>
+        <nomeprocesso>
+            <nomeUsuario>fcSlESEA2hE=</nomeUsuario>
+            <nome>Ofr8x3z/J78=</nome>
+            <id>BMYkfHe3ZtA=</id>
         </nomeprocesso>
     </listaprocessos>
+    <processos>
+	<processo>
+	    <nomeprocesso></nomeprocesso>
+            <idprocesso></idprocesso>
+            <idtipodocumental></idtipodocumental>
+            <nometipodocumental></nometipodocumental>
+            <idjanela></idjanela>
+            <idorganizacao></idorganizacao>
+	    <campos>
+	        <campo>
+                    <casas_decimais></casas_decimais>
+                    <unico></unico>
+                    <obrigatorio></obrigatorio>
+                    <id></id>
+                    <nome></nome>
+                    <apelido></apelido>
+                    <tamanho></tamanho>
+                    <numero_interno></numero_interno>
+		    <tipo_dado>
+                        <id></id>
+                        <tipo></tipo>
+                        <de></de>
+			<ate></ate>
+			<tipo_dado_banco><tipo_dado_banco>
+                    </tipo_dado>	
+                </campo>
+            </campos>
+	</processo>
+    </processos>
 </root>
 <!--
 To change this license header, choose License Headers in Project Properties.

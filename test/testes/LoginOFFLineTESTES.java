@@ -7,8 +7,6 @@ package testes;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashSet;
-import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import neutron.capture.negocio.RetornoCampo;
 import neutron.capture.negocio.RetornoNomeProcesso;

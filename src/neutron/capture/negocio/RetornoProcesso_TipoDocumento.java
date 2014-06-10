@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package neutron.capture.negocio;
 
 /**
@@ -11,12 +10,22 @@ package neutron.capture.negocio;
  * @author Marcos Arruda
  */
 public class RetornoProcesso_TipoDocumento extends erro {
+
     int ID;
     int IDProcesso;
     String Nome;
     String PadraoCor;
     boolean Obrigatorio;
     int NumeroPaginas;
+    int PaginasCapturadas;
+
+    public int getPaginasCapturadas() {
+        return PaginasCapturadas;
+    }
+
+    public void setPaginasCapturadas(int PaginasCapturadas) {
+        this.PaginasCapturadas = PaginasCapturadas;
+    }
 
     public int getID() {
         return ID;
@@ -65,5 +74,5 @@ public class RetornoProcesso_TipoDocumento extends erro {
     public void setNumeroPaginas(int NumeroPaginas) {
         this.NumeroPaginas = NumeroPaginas;
     }
-            
+
 }

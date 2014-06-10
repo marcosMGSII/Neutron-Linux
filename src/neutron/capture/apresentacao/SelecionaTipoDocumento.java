@@ -22,24 +22,26 @@ import neutron.capture.negocio.RetornoProcesso_TipoDocumento;
  * @author max
  */
 public class SelecionaTipoDocumento extends javax.swing.JFrame {
-
+    
     private int numProcessos;
     private JPanel panProcessos;
     private JPanel panProcessos2;
-
+    
     public SelecionaTipoDocumento() {
         initComponents();
+        btnVoltar.setBorder(null);
+        btnVoltar.setContentAreaFilled(false);
         numProcessos = 1;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         getContentPane().setBackground(Color.WHITE);
-
+        
         panProcessos = new JPanel();
         panProcessos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panProcessos.setSize(191, 70);
         panProcessoColuna1.setViewportView(panProcessos);
         panProcessos.setBackground(Color.WHITE);
         panProcessoColuna1.setBackground(Color.WHITE);
-
+        
         panProcessos2 = new JPanel();
         panProcessos2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panProcessos2.setSize(191, 70);
@@ -61,9 +63,10 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
 
         panProcessoColuna1 = new javax.swing.JScrollPane();
         panProcessoColuna2 = new javax.swing.JScrollPane();
-        jLabel1 = new javax.swing.JLabel();
+        lblLogoNeutron = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblLogoMGS = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(150, 89, 28));
@@ -73,63 +76,94 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
 
         panProcessoColuna2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagens/logo_neutron.png"))); // NOI18N
+        lblLogoNeutron.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagens/logo_neutron.png"))); // NOI18N
 
         lblTitulo.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(88, 119, 173));
         lblTitulo.setText("Selecione um Tipo de Documento");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagens/Logo.jpg"))); // NOI18N
+        lblLogoMGS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagens/Logo.jpg"))); // NOI18N
+
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/voltar.png"))); // NOI18N
+        btnVoltar.setToolTipText("Voltar para a seleção de processo");
+        btnVoltar.setBorder(null);
+        btnVoltar.setBorderPainted(false);
+        btnVoltar.setPreferredSize(new java.awt.Dimension(22, 22));
+        btnVoltar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/voltar_sel.png"))); // NOI18N
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(45, 45, 45)
+                .addComponent(lblLogoMGS)
+                .addGap(45, 45, 45)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(lblLogoNeutron)
+                .addGap(45, 45, 45))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
                         .addComponent(panProcessoColuna1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panProcessoColuna2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(50, 50, 50)
+                        .addComponent(panProcessoColuna2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(54, 54, 54)
+                .addGap(10, 10, 10)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panProcessoColuna1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLogoNeutron)
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblLogoMGS)
+                        .addGap(45, 45, 45)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panProcessoColuna1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(panProcessoColuna2))
-                .addContainerGap())
+                .addGap(50, 50, 50))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        Controle cp = Controle.getInstacia();
+        cp.setProcesso(null);
+        JFrame selecionaProcesso = new SelecionaProcessoFrame();
+        selecionaProcesso.getContentPane().setBackground(Color.white);
+        selecionaProcesso.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+    
     private void AddBotoes(RetornoProcesso rp) {
         if (rp != null && rp.getTiposDocumentos() != null) {
             for (RetornoProcesso_TipoDocumento umTipo : rp.getTiposDocumentos()) {
                 addBotaoProcesso(umTipo);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Nenhum tipo de tocumento localizado.\nO processo não possui tipos de documentos cadastrados!", "Tipo de Documentos", JOptionPane.WARNING_MESSAGE);
         }
     }
-
+    
     private void addBotaoProcesso(RetornoProcesso_TipoDocumento td) {
         JButton botaoProcesso = new JButton();
         botaoProcesso.setName("btnT" + td.getID());
@@ -140,7 +174,7 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
         } else {
             botaoProcesso.setText(td.getNome());
         }
-
+        
         botaoProcesso.setHorizontalTextPosition(SwingConstants.CENTER);
 
         //Objeto para concatenar o caminho dos icones
@@ -153,27 +187,41 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
         s.append(sep);
         s.append("botoes");
         s.append(sep);
-
+        
         if (td.isObrigatorio()) {
-            s.append("botao_processo_obrigatorio.png");
-            botaoProcesso.setIcon(new ImageIcon(getClass().getResource(s.toString())));
-            s.delete(s.length() - 30, s.length());
-            s.append("botao_processo_obrigatorio_sel.png");
-            botaoProcesso.setRolloverIcon(new ImageIcon(getClass().getResource(s.toString())));
-            botaoProcesso.setSize(184, 54);
-            botaoProcesso.setLocation(0, (numProcessos - 1) * 61);
+            if (td.getPaginasCapturadas() > 0) {
+                s.append("botao_obrigatorio_verificado.png");
+                botaoProcesso.setIcon(new ImageIcon(getClass().getResource(s.toString())));
+                s.delete(s.length() - 32, s.length());
+                s.append("botao_obrigatorio_verificado_sel.png");
+                botaoProcesso.setRolloverIcon(new ImageIcon(getClass().getResource(s.toString())));
+            } else {
+                s.append("botao_processo_obrigatorio.png");
+                botaoProcesso.setIcon(new ImageIcon(getClass().getResource(s.toString())));
+                s.delete(s.length() - 30, s.length());
+                s.append("botao_processo_obrigatorio_sel.png");
+                botaoProcesso.setRolloverIcon(new ImageIcon(getClass().getResource(s.toString())));
+            }
             botaoProcesso.setToolTipText(td.getNome() + " - Processo Obrigatório!");
         } else {
-            s.append("botao_processo.png");
-            botaoProcesso.setIcon(new ImageIcon(getClass().getResource(s.toString())));
-            s.delete(s.length() - 18, s.length());
-            s.append("botao_processo_sel.png");
-            botaoProcesso.setRolloverIcon(new ImageIcon(getClass().getResource(s.toString())));
-            botaoProcesso.setSize(184, 54);
-            botaoProcesso.setLocation(0, (numProcessos - 1) * 61);
+            if (td.getPaginasCapturadas() > 0) {
+                s.append("botao_verificado.png");
+                botaoProcesso.setIcon(new ImageIcon(getClass().getResource(s.toString())));
+                s.delete(s.length() - 20, s.length());
+                s.append("botao_verificado_sel.png");
+                botaoProcesso.setRolloverIcon(new ImageIcon(getClass().getResource(s.toString())));
+            } else {
+                s.append("botao_processo.png");
+                botaoProcesso.setIcon(new ImageIcon(getClass().getResource(s.toString())));
+                s.delete(s.length() - 18, s.length());
+                s.append("botao_processo_sel.png");
+                botaoProcesso.setRolloverIcon(new ImageIcon(getClass().getResource(s.toString())));
+            }
             botaoProcesso.setToolTipText(botaoProcesso.getText());
         }
-
+        botaoProcesso.setSize(184, 54);
+        botaoProcesso.setLocation(0, (numProcessos - 1) * 70);
+        botaoProcesso.setContentAreaFilled(false);
         botaoProcesso.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +237,7 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
             panProcessoColuna2.repaint();
             panProcessoColuna2.revalidate();
         } else {
-
+            
             panProcessos.add(botaoProcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(botaoProcesso.getX(), botaoProcesso.getY(), -1, -1));
             panProcessos.setSize(190 * numProcessos, 70);
             numProcessos++;
@@ -197,12 +245,16 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
             panProcessoColuna1.repaint();
             panProcessoColuna1.revalidate();
         }
-
+        
     }
-
+    
     private void processoButtonsActionPerformed(java.awt.event.ActionEvent evt) {
         JButton bt = (JButton) evt.getSource();
         System.out.println("Botão clicado:" + bt.getName());
+        Visualizador st = new Visualizador();
+        st.setExtendedState(JFrame.MAXIMIZED_BOTH);  
+        st.setVisible(true);
+        this.dispose();
     }
 
     /**
@@ -243,8 +295,9 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel lblLogoMGS;
+    private javax.swing.JLabel lblLogoNeutron;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JScrollPane panProcessoColuna1;
     private javax.swing.JScrollPane panProcessoColuna2;

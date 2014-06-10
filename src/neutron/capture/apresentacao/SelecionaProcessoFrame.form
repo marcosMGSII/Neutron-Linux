@@ -30,42 +30,38 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="panProcessoColuna1" min="-2" pref="210" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="panProcessoColuna2" min="-2" pref="210" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblTitulo" min="-2" pref="314" max="-2" attributes="0"/>
-                      <EmptySpace pref="38" max="32767" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+              <Component id="panProcessoColuna1" min="-2" pref="210" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="panProcessoColuna2" min="-2" pref="210" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Component id="lblTitulo" min="-2" pref="314" max="-2" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="lblLogo" max="32767" attributes="0"/>
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTitulo" max="32767" attributes="0"/>
+                  <Component id="lblTitulo" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panProcessoColuna1" pref="346" max="32767" attributes="0"/>
+                  <Component id="panProcessoColuna1" pref="88" max="32767" attributes="0"/>
                   <Component id="panProcessoColuna2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

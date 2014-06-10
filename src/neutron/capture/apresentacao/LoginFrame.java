@@ -6,8 +6,11 @@
 package neutron.capture.apresentacao;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +46,23 @@ public class LoginFrame extends javax.swing.JFrame {
         getContentPane().add(background);
         background.setSize(656, 356);
         inicializaComponents(background);
+    }
+
+    private void definiIcone() {
+        // coloca uma figura na barra de título da janela
+        String sep = File.separator;
+        StringBuilder s = new StringBuilder();
+        s.append(sep);
+        s.append("resources");
+        s.append(sep);
+        s.append("imagens");
+        s.append(sep);
+        s.append("icones");
+        s.append(sep);
+        s.append("Neutron_Capture.png");
+        URL url = getClass().getResource(s.toString());
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo);
     }
 
     private void inicializaComponents(JPanelWithBackground b) {
@@ -84,6 +104,7 @@ public class LoginFrame extends javax.swing.JFrame {
         txtUsuario.setText("Neutron");
         txtSenha.setText("Kodak659");
         txtOrganizacao.setText("MGS");
+        this.definiIcone();
     }
 
     public static void main(String args[]) {
@@ -112,6 +133,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.SystemColor.control);
+        setIconImage(getIconImage());
         setIconImages(null);
         setResizable(false);
 
@@ -199,7 +221,7 @@ public class LoginFrame extends javax.swing.JFrame {
                         Controle cp = Controle.getInstacia();
                         cp.setOffline(false);
                         cp.setChaveAcesso(r.getChaveAcesso());
-                        cp.setNomesProcessos(servico.ListaProcessos(r.getChaveAcesso()),nomeUsuarioLogado);
+                        cp.setNomesProcessos(servico.ListaProcessos(r.getChaveAcesso()), nomeUsuarioLogado);
 
                         JFrame selecionaProcesso = new SelecionaProcessoFrame();
                         selecionaProcesso.getContentPane().setBackground(Color.white);
@@ -210,10 +232,10 @@ public class LoginFrame extends javax.swing.JFrame {
             } else {
                 try {
                     DadosOFFLine loginOFF = new DadosOFFLine();
-                    if (loginOFF.validaDadosLoginOFFLine(this.txtUsuario.getText(), this.txtSenha.getText(), this.txtOrganizacao.getText())) {                        
+                    if (loginOFF.validaDadosLoginOFFLine(this.txtUsuario.getText(), this.txtSenha.getText(), this.txtOrganizacao.getText())) {
                         Controle cp = Controle.getInstacia();
                         cp.setOffline(true);
-                        cp.setNomesProcessos(loginOFF.recuperaDadosListaProcessoOFFLine(this.txtUsuario.getText()),this.txtUsuario.getText());
+                        cp.setNomesProcessos(loginOFF.recuperaDadosListaProcessoOFFLine(this.txtUsuario.getText()), this.txtUsuario.getText());
                         JFrame selecionaProcesso = new SelecionaProcessoFrame();
                         selecionaProcesso.getContentPane().setBackground(Color.white);
                         selecionaProcesso.setVisible(true);

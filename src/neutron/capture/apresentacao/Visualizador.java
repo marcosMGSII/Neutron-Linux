@@ -15,6 +15,7 @@ import javax.media.jai.JAI;
 import javax.media.jai.RenderedOp;
 import javax.media.jai.operator.ScaleDescriptor;
 import javax.media.jai.widget.ScrollingImagePanel;
+import neutron.capture.negocio.Controle;
 import neutron.capture.negocio.ManipulaImagens;
 
 /**
@@ -29,6 +30,8 @@ public class Visualizador extends javax.swing.JFrame {
 
     public Visualizador() {
         initComponents();
+        btnVoltar.setBorder(null);
+        btnVoltar.setContentAreaFilled(false);
         getContentPane().setBackground(Color.WHITE);
         abrirImagem();
     }
@@ -59,6 +62,7 @@ public class Visualizador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnVoltar = new javax.swing.JButton();
         panBotoes = new javax.swing.JPanel();
         btnIniciar = new javax.swing.JButton();
         btnParar = new javax.swing.JButton();
@@ -70,13 +74,21 @@ public class Visualizador extends javax.swing.JFrame {
         btnZoomOUT = new javax.swing.JButton();
         btnExcluirPagina = new javax.swing.JButton();
         btnExcluirTodasPaginas = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
         panVisualizador = new javax.swing.JPanel();
-        lblLogo = new javax.swing.JLabel();
-        lblLogoNeutron = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.white);
+
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/voltar.png"))); // NOI18N
+        btnVoltar.setToolTipText("Voltar para\nseleção de \ntipo de documento ");
+        btnVoltar.setBorder(null);
+        btnVoltar.setBorderPainted(false);
+        btnVoltar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/voltar_sel.png"))); // NOI18N
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         panBotoes.setBackground(java.awt.Color.white);
         panBotoes.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(85, 98, 210)));
@@ -171,15 +183,6 @@ public class Visualizador extends javax.swing.JFrame {
         btnExcluirTodasPaginas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnExcluirTodasPaginas.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/botao_excluir_todas_sel.png"))); // NOI18N
 
-        btnVoltar.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
-        btnVoltar.setForeground(new java.awt.Color(45, 77, 109));
-        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/botao_voltar.png"))); // NOI18N
-        btnVoltar.setText("       Voltar");
-        btnVoltar.setToolTipText("Voltar");
-        btnVoltar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        btnVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVoltar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/botao_voltar_sel.png"))); // NOI18N
-
         javax.swing.GroupLayout panBotoesLayout = new javax.swing.GroupLayout(panBotoes);
         panBotoes.setLayout(panBotoesLayout);
         panBotoesLayout.setHorizontalGroup(
@@ -201,8 +204,7 @@ public class Visualizador extends javax.swing.JFrame {
                             .addComponent(btnZoomOUT, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnExcluirTodasPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnZoomIN, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluirPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExcluirPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panBotoesLayout.setVerticalGroup(
@@ -211,6 +213,7 @@ public class Visualizador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panBotoesLayout.createSequentialGroup()
+                        .addGap(0, 0, 0)
                         .addComponent(btnParar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnProxima, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,9 +233,7 @@ public class Visualizador extends javax.swing.JFrame {
                         .addComponent(btnZoomIN, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExcluirPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnIniciar.getAccessibleContext().setAccessibleName("btnIniciar1");
@@ -256,40 +257,32 @@ public class Visualizador extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagens/Logo.jpg"))); // NOI18N
-
-        lblLogoNeutron.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagens/logo_neutron.png"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblLogo)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panVisualizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
-                        .addComponent(lblLogoNeutron)
-                        .addContainerGap())))
+                        .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)))
+                .addComponent(panVisualizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLogoNeutron))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panVisualizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(10, 10, 10)
+                .addComponent(panVisualizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(btnVoltar)
+                .addGap(10, 10, 10)
+                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -302,19 +295,30 @@ public class Visualizador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_panVisualizador_Resized
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        Controle cp = Controle.getInstacia();
+        //Testa se algum documento foi adiciona
+        cp.getProcesso().getTiposDocumentos()[0].setPaginasCapturadas(1);
+
+        SelecionaTipoDocumento st = new SelecionaTipoDocumento();
+        st.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     private void btnZoomOut_Click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomOut_Click
         RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
+            RenderingHints.VALUE_RENDER_QUALITY);
         img = JAI.create("SubsampleAverage", img, .9, .9, qualityHints);
-        //img = ScaleDescriptor.create(img, (float) .9, (float) .9, 0.0f, 0.0f, Interpolation.getInstance(Interpolation.INTERP_BICUBIC), qualityHints);        
+        //img = ScaleDescriptor.create(img, (float) .9, (float) .9, 0.0f, 0.0f, Interpolation.getInstance(Interpolation.INTERP_BICUBIC), qualityHints);
         carregaImagem();
     }//GEN-LAST:event_btnZoomOut_Click
 
     private void btnZoomIN_Click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomIN_Click
-        
+
         RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-        img = ScaleDescriptor.create(img, (float) 1.1, (float) 1.1, 0.0f, 0.0f, Interpolation.getInstance(Interpolation.INTERP_BICUBIC), qualityHints);        
+            RenderingHints.VALUE_RENDER_QUALITY);
+        img = ScaleDescriptor.create(img, (float) 1.1, (float) 1.1, 0.0f, 0.0f, Interpolation.getInstance(Interpolation.INTERP_BICUBIC), qualityHints);
         carregaImagem();
     }//GEN-LAST:event_btnZoomIN_Click
 
@@ -366,8 +370,6 @@ public class Visualizador extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JButton btnZoomIN;
     private javax.swing.JButton btnZoomOUT;
-    private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblLogoNeutron;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panVisualizador;
     // End of variables declaration//GEN-END:variables

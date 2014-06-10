@@ -28,44 +28,55 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panBotoes" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="panVisualizador" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="277" max="32767" attributes="0"/>
-                      <Component id="lblLogoNeutron" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="panBotoes" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  </Group>
               </Group>
+              <Component id="panVisualizador" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblLogo" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="lblLogoNeutron" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panBotoes" max="32767" attributes="0"/>
-                  <Component id="panVisualizador" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="panVisualizador" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="panBotoes" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JButton" name="btnVoltar">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/resources/imagens/botoes/voltar.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Voltar para&#xa;sele&#xe7;&#xe3;o de &#xa;tipo de documento "/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/resources/imagens/botoes/voltar_sel.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarActionPerformed"/>
+      </Events>
+    </Component>
     <Container class="javax.swing.JPanel" name="panBotoes">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -104,7 +115,6 @@
                       </Group>
                       <Component id="btnZoomIN" min="-2" pref="52" max="-2" attributes="0"/>
                       <Component id="btnExcluirPagina" min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="btnVoltar" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -116,6 +126,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="btnParar" min="-2" pref="52" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnProxima" min="-2" pref="52" max="-2" attributes="0"/>
@@ -138,9 +149,7 @@
                           <Component id="btnExcluirPagina" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="152" max="32767" attributes="0"/>
-                  <Component id="btnVoltar" min="-2" pref="54" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -385,30 +394,6 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnVoltar">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="16" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="6d" green="4d" red="2d" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/imagens/botoes/botao_voltar.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="       Voltar"/>
-            <Property name="toolTipText" type="java.lang.String" value="Voltar"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                <EmptyBorder bottom="0" left="0" right="0" top="0"/>
-              </Border>
-            </Property>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/imagens/botoes/botao_voltar_sel.png"/>
-            </Property>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="panVisualizador">
@@ -441,19 +426,5 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblLogo">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/resources/Imagens/Logo.jpg"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblLogoNeutron">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/resources/Imagens/logo_neutron.png"/>
-        </Property>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

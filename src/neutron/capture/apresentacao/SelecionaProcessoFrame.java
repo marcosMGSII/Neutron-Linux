@@ -95,35 +95,33 @@ public class SelecionaProcessoFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panProcessoColuna1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panProcessoColuna2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(lblLogo)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(jLabel1)))
-                .addContainerGap())
+                .addGap(100, 100, 100)
+                .addComponent(panProcessoColuna1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(panProcessoColuna2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(lblLogo)
+                .addGap(45, 45, 45)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panProcessoColuna1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                    .addComponent(panProcessoColuna1, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                     .addComponent(panProcessoColuna2))
-                .addContainerGap())
+                .addGap(50, 50, 50))
         );
 
         pack();
@@ -164,7 +162,7 @@ public class SelecionaProcessoFrame extends javax.swing.JFrame {
         s.append("botao_processo_sel.png");
         botaoProcesso.setRolloverIcon(new ImageIcon(getClass().getResource(s.toString())));
         botaoProcesso.setSize(184, 54);
-        botaoProcesso.setLocation(0, (numProcessos - 1) * 61);
+        botaoProcesso.setLocation(0, (numProcessos - 1) * 70);
         botaoProcesso.setToolTipText(botaoProcesso.getText());
 
         botaoProcesso.addActionListener(new java.awt.event.ActionListener() {
@@ -178,8 +176,9 @@ public class SelecionaProcessoFrame extends javax.swing.JFrame {
             }
         });
         botaoProcesso.setBorder(null);
+        botaoProcesso.setContentAreaFilled(false);
         if (numProcessos > 10) {
-            panProcessos2.add(botaoProcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(botaoProcesso.getX(), (numProcessos - 11) * 61, -1, -1));
+            panProcessos2.add(botaoProcesso, new org.netbeans.lib.awtextra.AbsoluteConstraints(botaoProcesso.getX(), (numProcessos - 11) * 70, -1, -1));
             panProcessos2.setSize(190 * numProcessos, 70);
             numProcessos++;
             panProcessos2.repaint();
@@ -197,10 +196,8 @@ public class SelecionaProcessoFrame extends javax.swing.JFrame {
     }
 
     private void processoButtonsActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
-        JButton bt = (JButton) evt.getSource();
-        System.out.println("Botão clicado:" + bt.getName());
-        String idProcesso = bt.getName().substring(4);
-        System.out.println("idProcesso:" + idProcesso);
+        JButton bt = (JButton) evt.getSource();        
+        String idProcesso = bt.getName().substring(4);        
         Controle cp = Controle.getInstacia();
         RetornoProcesso p = null;
         if (!cp.isOffline()) {

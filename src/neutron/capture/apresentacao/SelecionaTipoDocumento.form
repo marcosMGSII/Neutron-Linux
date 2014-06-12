@@ -167,9 +167,14 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/resources/imagens/botoes/botao_documento_ok.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Indexar Documentos..."/>
         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Realiza a indexa&#xe7;&#xe3;o de todos&lt;br&gt;os documentos capturados&lt;/html&gt;"/>
+        <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/resources/imagens/botoes/botao_documentos_indexados_sel.png"/>
+        </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIndexarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

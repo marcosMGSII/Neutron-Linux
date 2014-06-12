@@ -31,6 +31,8 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
         initComponents();
         btnVoltar.setBorder(null);
         btnVoltar.setContentAreaFilled(false);
+        btnIndexar.setBorder(null);        
+        btnIndexar.setContentAreaFilled(false);
         numProcessos = 1;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         getContentPane().setBackground(Color.WHITE);
@@ -89,7 +91,6 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
         btnVoltar.setToolTipText("<html>Voltar para a<br>seleção de processo</html>");
         btnVoltar.setBorder(null);
         btnVoltar.setBorderPainted(false);
-        btnVoltar.setPreferredSize(new java.awt.Dimension(22, 22));
         btnVoltar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/voltar_sel.png"))); // NOI18N
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,8 +102,13 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
         btnIndexar.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         btnIndexar.setForeground(new java.awt.Color(16, 16, 8));
         btnIndexar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/botao_documento_ok.png"))); // NOI18N
-        btnIndexar.setText("Indexar Documentos...");
         btnIndexar.setToolTipText("<html>Realiza a indexação de todos<br>os documentos capturados</html>");
+        btnIndexar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/botao_documentos_indexados_sel.png"))); // NOI18N
+        btnIndexar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIndexarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,7 +118,7 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnVoltar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(lblLogoMGS)
@@ -136,7 +142,7 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVoltar)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLogoNeutron)
@@ -146,13 +152,10 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 35, Short.MAX_VALUE)
-                        .addComponent(btnIndexar)
-                        .addGap(45, 45, 45))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panProcessoColuna1)
-                            .addComponent(panProcessoColuna2))
-                        .addGap(45, 45, 45))))
+                        .addComponent(btnIndexar))
+                    .addComponent(panProcessoColuna1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panProcessoColuna2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -167,6 +170,13 @@ public class SelecionaTipoDocumento extends javax.swing.JFrame {
         selecionaProcesso.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnIndexarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIndexarActionPerformed
+        // TODO add your handling code here:
+        JFrame indexaDocumentos = new Indexacao();        
+        indexaDocumentos.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnIndexarActionPerformed
 
     private void AddBotoes(RetornoProcesso rp) {
         if (rp != null && rp.getTiposDocumentos() != null) {

@@ -32,6 +32,8 @@ public class Visualizador extends javax.swing.JFrame {
         initComponents();
         btnVoltar.setBorder(null);
         btnVoltar.setContentAreaFilled(false);
+        btnCapturaConcluida.setBorder(null);
+        btnCapturaConcluida.setContentAreaFilled(false);
         getContentPane().setBackground(Color.WHITE);
         abrirImagem();
     }
@@ -55,7 +57,7 @@ public class Visualizador extends javax.swing.JFrame {
         panVisualizador.setLayout(panVisualizadorLayout);
         ManipulaImagens manipulaImg = new ManipulaImagens();
         img = manipulaImg.AbrirArquivoTIF("/home/max/Imagens/Arquivos Importar/00000001.TIF");
-        carregaImagem();
+        carregaImagem();        
     }
 
     @SuppressWarnings("unchecked")
@@ -75,6 +77,7 @@ public class Visualizador extends javax.swing.JFrame {
         btnExcluirPagina = new javax.swing.JButton();
         btnExcluirTodasPaginas = new javax.swing.JButton();
         panVisualizador = new javax.swing.JPanel();
+        btnCapturaConcluida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.white);
@@ -213,7 +216,6 @@ public class Visualizador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panBotoesLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(btnParar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnProxima, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,39 +252,52 @@ public class Visualizador extends javax.swing.JFrame {
         panVisualizador.setLayout(panVisualizadorLayout);
         panVisualizadorLayout.setHorizontalGroup(
             panVisualizadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 371, Short.MAX_VALUE)
         );
         panVisualizadorLayout.setVerticalGroup(
             panVisualizadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        btnCapturaConcluida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/botao_documentos_capturados.png"))); // NOI18N
+        btnCapturaConcluida.setToolTipText("<html>Finaliza<br>a captura<br>dos documentos do<br>tipo de documento</html>");
+        btnCapturaConcluida.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/botao_documentos_capturados_sel.png"))); // NOI18N
+        btnCapturaConcluida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapturaConcluidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCapturaConcluida)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                    .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(panVisualizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(panVisualizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnVoltar)
-                .addGap(10, 10, 10)
-                .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(btnVoltar))
+                            .addComponent(btnCapturaConcluida))
+                        .addGap(12, 12, 12)
+                        .addComponent(panBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 129, Short.MAX_VALUE))
+                    .addComponent(panVisualizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -296,11 +311,7 @@ public class Visualizador extends javax.swing.JFrame {
     }//GEN-LAST:event_panVisualizador_Resized
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-        Controle cp = Controle.getInstacia();
-        //Testa se algum documento foi adiciona
-        cp.getProcesso().getTiposDocumentos()[0].setPaginasCapturadas(1);
-
+        // TODO add your handling code here:        
         SelecionaTipoDocumento st = new SelecionaTipoDocumento();
         st.setVisible(true);
         this.dispose();
@@ -321,6 +332,17 @@ public class Visualizador extends javax.swing.JFrame {
         img = ScaleDescriptor.create(img, (float) 1.1, (float) 1.1, 0.0f, 0.0f, Interpolation.getInstance(Interpolation.INTERP_BICUBIC), qualityHints);
         carregaImagem();
     }//GEN-LAST:event_btnZoomIN_Click
+
+    private void btnCapturaConcluidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaConcluidaActionPerformed
+        // TODO add your handling code here:
+         Controle cp = Controle.getInstacia();
+        //Testa se algum documento foi adiciona
+        cp.getProcesso().getTiposDocumentos()[0].setPaginasCapturadas(1);
+
+        SelecionaTipoDocumento st = new SelecionaTipoDocumento();
+        st.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCapturaConcluidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,6 +382,7 @@ public class Visualizador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnCapturaConcluida;
     private javax.swing.JButton btnDireita;
     private javax.swing.JButton btnEsquerda;
     private javax.swing.JButton btnExcluirPagina;

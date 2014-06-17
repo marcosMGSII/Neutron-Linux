@@ -25,7 +25,7 @@ public class NeutronCapture {
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }
-//        Splash telaSplash = new Splash();
+        Splash telaSplash = new Splash();
         JFrame login = new LoginFrame();
         login.setVisible(true);        
     }

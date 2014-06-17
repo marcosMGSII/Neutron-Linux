@@ -22,7 +22,16 @@ public class Controle {
 
     RetornoNomeProcesso[] nomesProcessos;
     RetornoProcesso processo;
+    RetornoProcesso_TipoDocumento tipoDocumentoSelecionado;
     String chaveAcesso;
+
+    public RetornoProcesso_TipoDocumento getTipoDocumentoSelecionado() {
+        return tipoDocumentoSelecionado;
+    }
+
+    public void setTipoDocumentoSelecionado(RetornoProcesso_TipoDocumento tipoDocumentoSelecionado) {
+        this.tipoDocumentoSelecionado = tipoDocumentoSelecionado;
+    }
     boolean offline;
 
     public RetornoProcesso getProcesso() {
@@ -64,15 +73,15 @@ public class Controle {
         return nomesProcessos;
     }
 
-    public void setNomesProcessos(RetornoNomeProcesso[] rnp,String nomeUsuario){
+    public void setNomesProcessos(RetornoNomeProcesso[] rnp, String nomeUsuario) {
         this.nomesProcessos = rnp;
-        DadosOFFLine dadosOFFLINE;                                     
+        DadosOFFLine dadosOFFLINE;
         try {
             dadosOFFLINE = new DadosOFFLine();
             dadosOFFLINE.salvaDadosListaProcessoOFFLine(rnp, nomeUsuario);
         } catch (ParserConfigurationException | NoSuchAlgorithmException | IOException ex) {
             Logger.getLogger(Controle.class.getName()).log(Level.SEVERE, null, ex);
-        }                                    
+        }
     }
 
 }

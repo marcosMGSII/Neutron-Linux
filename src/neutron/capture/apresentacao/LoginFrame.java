@@ -107,16 +107,6 @@ public class LoginFrame extends javax.swing.JFrame {
         this.definiIcone();
     }
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                LoginFrame frameComBackground = new LoginFrame();
-                frameComBackground.setVisible(true);
-                frameComBackground.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            }
-        });
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

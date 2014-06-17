@@ -1,6 +1,6 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template source, choose Tools | Templates
  * and open the template in the editor.
  */
 package neutron.capture.apresentacao;
@@ -10,6 +10,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.RenderingHints;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.jai.Interpolation;
 import javax.media.jai.JAI;
 import javax.media.jai.RenderedOp;
@@ -34,8 +41,7 @@ public class Visualizador extends javax.swing.JFrame {
         btnVoltar.setContentAreaFilled(false);
         btnCapturaConcluida.setBorder(null);
         btnCapturaConcluida.setContentAreaFilled(false);
-        getContentPane().setBackground(Color.WHITE);
-        abrirImagem();
+        //getContentPane().setBackground(Color.WHITE);        
     }
 
     private void carregaImagem() {
@@ -52,12 +58,71 @@ public class Visualizador extends javax.swing.JFrame {
         repaint();
     }
 
-    public final void abrirImagem() {
-        javax.swing.GroupLayout panVisualizadorLayout = new javax.swing.GroupLayout(panVisualizador);
-        panVisualizador.setLayout(panVisualizadorLayout);
-        ManipulaImagens manipulaImg = new ManipulaImagens();
-        img = manipulaImg.AbrirArquivoTIF("/home/max/Imagens/Arquivos Importar/00000001.TIF");
-        carregaImagem();        
+    public String converteParaTIF(String arquivo) {
+        return arquivo;
+    }
+
+    public static void copyFile(File source, File destination) throws IOException {
+        if (destination.exists()) {
+            destination.delete();
+        }
+
+        FileChannel sourceChannel = null;
+        FileChannel destinationChannel = null;
+
+        try {
+            sourceChannel = new FileInputStream(source).getChannel();
+            destinationChannel = new FileOutputStream(destination).getChannel();
+            sourceChannel.transferTo(0, sourceChannel.size(),
+                    destinationChannel);
+        } finally {
+            if (sourceChannel != null && sourceChannel.isOpen()) {
+                sourceChannel.close();
+            }
+            if (destinationChannel != null && destinationChannel.isOpen()) {
+                destinationChannel.close();
+            }
+        }
+    }
+
+    public void importarArquivo(String arquivo) {
+        java.io.File source = new File(arquivo);
+        if (source.exists()) {
+            arquivo = converteParaTIF(arquivo);
+            java.io.File destination = new File(getNomePagina());
+            try {
+                copyFile(source, destination);
+            } catch (IOException ex) {
+                Logger.getLogger(Visualizador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            abrirImagem(destination.getAbsolutePath());
+        }
+    }
+
+    public String getNomePagina() {
+        String retorno = "";
+        Controle cp = Controle.getInstacia();
+        File file = new File(File.separator + "digitalizando" + File.separator + cp.getProcesso().getNomeTipoDocumental() + File.separator + cp.getProcesso().getID()+ File.separator + cp.getTipoDocumentoSelecionado().getID());
+        int countFiles = 0;
+        if (!file.exists()) {
+            file.mkdir();
+        } else {
+            countFiles = file.listFiles().length;
+        }
+        //retorno = getClass().getResource(file.getPath()).getPath();
+        retorno = file.getPath() + File.separator + String.format("%08d", countFiles) + ".TIF";        
+        return retorno;
+    }
+
+    public final void abrirImagem(String arquivo) {
+        java.io.File file = new File(arquivo);
+        if (file.exists()) {
+            javax.swing.GroupLayout panVisualizadorLayout = new javax.swing.GroupLayout(panVisualizador);
+            panVisualizador.setLayout(panVisualizadorLayout);
+            ManipulaImagens manipulaImg = new ManipulaImagens();
+            img = manipulaImg.AbrirArquivoTIF(arquivo);
+            carregaImagem();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -103,6 +168,11 @@ public class Visualizador extends javax.swing.JFrame {
         btnIniciar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         btnIniciar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnIniciar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/botoes/botao_iniciar_sel.png"))); // NOI18N
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
 
         btnParar.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
         btnParar.setForeground(new java.awt.Color(45, 77, 109));
@@ -319,7 +389,7 @@ public class Visualizador extends javax.swing.JFrame {
 
     private void btnZoomOut_Click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomOut_Click
         RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_RENDERING,
-            RenderingHints.VALUE_RENDER_QUALITY);
+                RenderingHints.VALUE_RENDER_QUALITY);
         img = JAI.create("SubsampleAverage", img, .9, .9, qualityHints);
         //img = ScaleDescriptor.create(img, (float) .9, (float) .9, 0.0f, 0.0f, Interpolation.getInstance(Interpolation.INTERP_BICUBIC), qualityHints);
         carregaImagem();
@@ -328,14 +398,14 @@ public class Visualizador extends javax.swing.JFrame {
     private void btnZoomIN_Click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomIN_Click
 
         RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_RENDERING,
-            RenderingHints.VALUE_RENDER_QUALITY);
+                RenderingHints.VALUE_RENDER_QUALITY);
         img = ScaleDescriptor.create(img, (float) 1.1, (float) 1.1, 0.0f, 0.0f, Interpolation.getInstance(Interpolation.INTERP_BICUBIC), qualityHints);
         carregaImagem();
     }//GEN-LAST:event_btnZoomIN_Click
 
     private void btnCapturaConcluidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturaConcluidaActionPerformed
         // TODO add your handling code here:
-         Controle cp = Controle.getInstacia();
+        Controle cp = Controle.getInstacia();
         //Testa se algum documento foi adiciona
         cp.getProcesso().getTiposDocumentos()[0].setPaginasCapturadas(1);
 
@@ -344,41 +414,10 @@ public class Visualizador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCapturaConcluidaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Visualizador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Visualizador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Visualizador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Visualizador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Visualizador().setVisible(true);
-            }
-        });
-    }
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        // TODO add your handling code here:
+        importarArquivo("/home/max/Imagens/Arquivos Importar/00000001.TIF");
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;

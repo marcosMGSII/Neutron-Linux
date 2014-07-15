@@ -10,7 +10,7 @@ package neutron.capture.negocio;
  * @author Marcos Arruda
  * @date 05/06/2014
  */
-public class RetornoProcesso extends erro {
+public class RetornoProcesso extends Erro {
 
     @Override
     public String toString() {

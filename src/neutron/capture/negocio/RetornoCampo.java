@@ -9,7 +9,7 @@ package neutron.capture.negocio;
  *
  * @author max
  */
-public class RetornoCampo extends erro {
+public class RetornoCampo extends Erro {
 
     int Casas_Decimais;
     boolean Unico;

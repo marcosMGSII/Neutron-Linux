@@ -540,7 +540,7 @@ public class DadosOFFLine {
     public boolean salvaDadosProcessoOFFLine(RetornoProcesso p) throws NoSuchAlgorithmException, IOException, UnsupportedEncodingException {
         boolean retorno = true;
         try {
-            if (nomeArquivoXML != null) {
+            if (nomeArquivoXML != null & p != null & p.getID() > 0) {
                 Element rootTag = doc.getDocumentElement();
                 Element processosTag = (Element) rootTag.getElementsByTagName("processos").item(0);
                 boolean achouProcesso = false;

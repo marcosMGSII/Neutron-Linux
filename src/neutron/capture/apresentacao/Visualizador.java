@@ -41,7 +41,7 @@ public class Visualizador extends javax.swing.JFrame {
         btnVoltar.setContentAreaFilled(false);
         btnCapturaConcluida.setBorder(null);
         btnCapturaConcluida.setContentAreaFilled(false);
-        //getContentPane().setBackground(Color.WHITE);        
+        getContentPane().setBackground(Color.WHITE);        
     }
 
     private void carregaImagem() {
@@ -102,14 +102,25 @@ public class Visualizador extends javax.swing.JFrame {
     public String getNomePagina() {
         String retorno = "";
         Controle cp = Controle.getInstacia();
-        File file = new File(File.separator + "digitalizando" + File.separator + cp.getProcesso().getNomeTipoDocumental() + File.separator + cp.getProcesso().getID()+ File.separator + cp.getTipoDocumentoSelecionado().getID());
         int countFiles = 0;
+        String sep = File.separator;
+        StringBuilder s = new StringBuilder();
+        s.append(System.getProperty("user.home"));
+        s.append(sep);
+        s.append("Neutron Capture");        
+        s.append(sep);
+        s.append("digitalizando");
+        s.append(sep);
+        s.append(cp.getProcesso().getNomeTipoDocumental());
+        s.append(sep);
+        s.append(cp.getTipoDocumentoSelecionado().getID());        
+        File file = new File(s.toString());
+        
         if (!file.exists()) {
-            file.mkdir();
+            System.out.println(""+ file.mkdirs());
         } else {
             countFiles = file.listFiles().length;
-        }
-        //retorno = getClass().getResource(file.getPath()).getPath();
+        }       
         retorno = file.getPath() + File.separator + String.format("%08d", countFiles) + ".TIF";        
         return retorno;
     }

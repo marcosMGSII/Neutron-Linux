@@ -9,7 +9,7 @@ package neutron.capture.negocio;
  *
  * @author Marcos Arruda
  */
-public class RetornoProcesso_TipoDocumento extends erro {
+public class RetornoProcesso_TipoDocumento extends Erro {
 
     int ID;
     int IDProcesso;

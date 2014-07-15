@@ -215,13 +215,13 @@ public class SelecionaProcessoFrame extends javax.swing.JFrame {
         if (p != null) {
             cp.setProcesso(p);
             if (!cp.isOffline()) {
-                DadosOFFLine setProcessoOffLine;
-                try {
-                    setProcessoOffLine = new DadosOFFLine();
-                    setProcessoOffLine.salvaDadosProcessoOFFLine(p);
-                } catch (        ParserConfigurationException | NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-                    Logger.getLogger(SelecionaProcessoFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }                
+//                DadosOFFLine setProcessoOffLine;
+//                try {
+//                    setProcessoOffLine = new DadosOFFLine();
+//                    setProcessoOffLine.salvaDadosProcessoOFFLine(p);
+//                } catch (        ParserConfigurationException | NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+//                    Logger.getLogger(SelecionaProcessoFrame.class.getName()).log(Level.SEVERE, null, ex);
+//                }                
             }
         } else {
             //Falha ao buscar dados do processo

@@ -21,7 +21,7 @@ public class Proxy {
 
     private WebResource webResource;
     private Client client;
-    private static final String BASE_URI = "http://192.168.0.20/wcfservice/RestServiceImpl.svc";
+    private static final String BASE_URI = "http://192.168.0.205/wcfservice/RestServiceImpl.svc";
     public boolean webSericeOnLine;
 
     public Proxy() {

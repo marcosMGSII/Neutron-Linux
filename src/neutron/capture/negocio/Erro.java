@@ -10,7 +10,7 @@ package neutron.capture.negocio;
  *
  * @author Marcos
  */
-public class erro {
+public class Erro {
     boolean Erro;
     String MensagemErro;
     String MensagemErroSistema;
